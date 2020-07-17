@@ -1,16 +1,21 @@
 import React from 'react';
 import './App.css';
+import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import PlayVsIA from './PlayVsIA';
-
+import PlayerVSPlayer from './components/PlayerVSPlayer';
+import Home from './components/Home';
+import NotFound from './components/NotFound';
 
 function App() {
   return (
-    <div className="bg-dark p-2 mt-2 rounded container">
-        <h1 className="text-center text-bolder text-light">
-          Rock, Paper, Scissors, Lizard or Spock.
-        </h1>
-        <PlayVsIA/>      
+    <div>
+      <BrowserRouter>
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path = '/onevsone' component={PlayerVSPlayer}/>
+            <Route path="*" component={NotFound} />
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
