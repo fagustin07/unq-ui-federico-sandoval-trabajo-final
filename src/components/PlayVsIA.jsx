@@ -1,74 +1,68 @@
 import React, { useState } from 'react';
 import Items from './Items';
 import LogicalFight from './LogicalFight';
+import PicksInfo from './PicksInfo';
 
 const PlayVsIA = () => {
-    const [selectedWeapon, setSelectedWeapon] = useState(undefined);
+    const [playerOnePick, setplayerOnePick] = useState(null);
     const [pickIA, setPickIA] = useState(null);
-    const randomPickIA = ['rock', 'scissors', 'paper', 'lizard', 'spock']
-    const [result, setResult] = useState(undefined);
+    const [result, setResult] = useState(null);
     const [playerWins, setPlayerWins] = useState(0);
     const [iaWins, setIaWins] = useState(0);
+    const [showSelections, setshowSelections] = useState(false);
+    const [showingButton, setShowingButton] = useState(null);
 
     const  randomPick = () => {
         const selectedItem = Math.floor(Math.random() * 5);
         const list = ['rock', 'scissors', 'paper', 'lizard', 'spock'];
         return list[selectedItem];
-      }
-    const fight = () => {
-        console.log(pickIA);
-        console.log(selectedWeapon);
-        if (selectedWeapon){
-            const result = LogicalFight.startFight(selectedWeapon,pickIA);
-            setResult(result);
-            if (result.finish==='success') setPlayerWins(playerWins+1); 
-            if (result.finish==='danger') setIaWins(iaWins+1); 
-        }
-    }
-    
-    const handleSubmit = () =>  {
-        setPickIA(randomPick());
-        setTimeout(() => fight(), 1000);
     }
 
+    const fight = () => {
+            const result = LogicalFight.startFight(playerOnePick,pickIA,'vsSheldon');
+            setResult(result);
+            if (result.finish==='success') setPlayerWins(playerWins+1); 
+            if (result.finish==='danger') setIaWins(iaWins+1);
+            setshowSelections(true);
+            setShowingButton('playAgain');
+    }
+
+    const restartGame = () => {
+        setResult(null);
+        setShowingButton(null);
+        setplayerOnePick(null);
+        setPickIA(null);
+        setshowSelections(false);
+    }
 
     const handleSelect = (pick) => {
         setResult(null);
-        setSelectedWeapon(pick);
+        setplayerOnePick(pick);
         setPickIA(randomPick());
-        setTimeout(() => fight(), 1000);
+        setShowingButton('fight');
     }
 
     return(
         <>
-        <div className="bg-secondary m-3 rounded align-items-center">
+        <div className="bg-secondary m-3 rounded">
 
-            <Items setSelectedWeapon={handleSelect}/>
+            {(showingButton==='fight' || !showingButton) &&
+            <Items setAnItem={handleSelect} playerColor='light'/>}
             
-            <div className="col ml-1">
-                <div className="col text-center">
-                    <h3>Player Pick: </h3>
-                    <img src={selectedWeapon ? `${selectedWeapon}.png` : 'unknow-pick.png'}
-                        alt='selected item' className="player-item rounded"/>
-                </div>
-            </div>
-            <div className='col ml-1 text-center'>
-                <h1>VS</h1>
-                {result && <p className={`alert alert-${result.finish} row`}>{result.message}</p>}
-            </div>
-            <div className="col ml-1">
-                <div className="col text-center">
-                    <h3>Sheldon Pick: </h3>
-                    <img src={pickIA ? `${pickIA}.png` : 'unknow-pick.png'}
-                        alt='ia item' className="player-item rounded"/>
-                </div>
-            </div>
+            <PicksInfo playerOne='Player' playerTwo='Sheldon'
+                       result={result} playerOnePick={playerOnePick}
+                       playerTwoPick={pickIA} showSelections={showSelections}/>
+
         </div>
 
         <div className="row">
             <p className="col text-center text-light">Player: {playerWins}</p>
-            <button className="btn btn-danger col-2"
-                onClick={handleSubmit} >FIGHT!</button>
+            {showingButton==='fight' && 
+                <button className="btn btn-danger col-2"
+                onClick={fight} >FIGHT!</button>}
+            {showingButton==='playAgain' && 
+                <button className="btn btn-info col-2"
+                onClick={restartGame} >PLAY AGAIN!</button>}
             <p className="col text-center text-light">Sheldon: {iaWins}</p>
         </div>
         </>

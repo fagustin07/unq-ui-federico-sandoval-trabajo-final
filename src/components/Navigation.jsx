@@ -1,20 +1,19 @@
 import React  from 'react';
-import { useHistory } from 'react-router';
 
 const Navigation= ({onChangeGameMode}) => {
-    const history = useHistory();
+    const goPlayerVSSheldon = () => onChangeGameMode(true);
     
-    const goToHome = () => history.push('/');
+    const goOneVSOne = () => onChangeGameMode(false);
     
-    const goToVsPlayer = () => history.push('/onevsone');
-  
     return (
-        <nav className="navbar navbar-dark bg-info rounded p-10 justify-content-between">
-            <button type="button" className="navbar-brand btn btn-outline-dark" onClick={goToHome}>Player VS Sheldon </button>
-            <h1 className="text-center text-bolder text-light">
-            Rock, Paper, Scissors, Lizard or Spock.
+        <nav className="navbar navbar-dark bg-info rounded">
+            <button type="button" className="navbar-brand btn btn-outline-dark" onClick={goPlayerVSSheldon}>
+            <img className='pvsp' src='versus.png' alt="player vs sheldon"/> </button>
+            <h1 className="text-center text-light">
+            Rock, Paper, Scissors, Lizard or Spock!
             </h1>
-            <button className="navbar-brand btn btn-outline-dark" type="submit" onClick={goToVsPlayer}>Player VS Player </button>
+            <button className="navbar-brand btn btn-outline-dark" type="submit" onClick={goOneVSOne}>
+                <img className='pvsp' src='multiplayer.svg' alt="player vs player"/> </button>
         </nav>
       );
     }

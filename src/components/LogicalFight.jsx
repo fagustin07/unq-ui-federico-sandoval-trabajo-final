@@ -5,128 +5,129 @@ const isPaper    = (item) => item==='paper';
 const isLizard   = (item) => item==='lizard';
 const isSpock    = (item) => item==='spock';
 
-const startFight = (playerItem, sheldonItem) =>{
+const startFight = (playerItem, anotherItem, gameMode) =>{
     const result = {finish: 'warning', message: ''};
-
+    const fstPlayer = gameMode ? 'Player' : 'Player 1'
+    const sndPlayer = gameMode ? 'Sheldon' : 'Player 2'
     switch (playerItem){
         case('rock') :
-            if(isRock(sheldonItem)) result.message =`The rocks crashes! It's an empty :|`;
+            if(isRock(anotherItem)) result.message =`The rocks crashes! It's an empty :|`;
             
-            if(isScissors(sheldonItem)) {
-                result.message=`Rock destroys scissors! Player wins :)`;
+            if(isScissors(anotherItem)) {
+                result.message=`Rock destroys scissors! ${fstPlayer} wins :)`;
                 result.finish='success'
             };
 
-            if(isPaper(sheldonItem)) {
-                result.message=`Paper wrap the rock! Sheldon wins :(`;
+            if(isPaper(anotherItem)) {
+                result.message=`Paper wrap the rock! ${sndPlayer} wins :(`;
                 result.finish='danger';
             };
 
-            if(isLizard(sheldonItem)) {
-                result.message=`Rock crushes the lizard! Player wins :)`;
+            if(isLizard(anotherItem)) {
+                result.message=`Rock destroys the lizard! ${fstPlayer} wins :)`;
                 result.finish='success';
             };
 
-            if(isSpock(sheldonItem)) {
-                result.message=`Spock vaporized the rock! Sheldon wins :(`;
+            if(isSpock(anotherItem)) {
+                result.message=`Spock vaporized the rock! ${sndPlayer} wins :(`;
                 result.finish='danger';
             };
         break;
         
         case('scissors') :
-            if(isRock(sheldonItem)){
-                result.message =`Rock destroys scissors! Sheldon wins :(`;
+            if(isRock(anotherItem)){
+                result.message =`Rock destroys scissors! ${sndPlayer} wins :(`;
                 result.finish='danger'
             };
                 
-            if(isScissors(sheldonItem)) result.message=`The scissors crashes! It's an empty :|`;;
+            if(isScissors(anotherItem)) result.message=`The scissors crashes! It's an empty :|`;;
 
-            if(isPaper(sheldonItem)) {
-                result.message=`Scissors cuts paper! Player wins :)`;
+            if(isPaper(anotherItem)) {
+                result.message=`Scissors cuts paper! ${fstPlayer} wins :)`;
                 result.finish='success';
             };
 
-            if(isLizard(sheldonItem)) {
-                result.message=`Scissors beheads lizard! Player wins :)`;
+            if(isLizard(anotherItem)) {
+                result.message=`Scissors beheads lizard! ${fstPlayer} wins :)`;
                 result.finish='success';
             };
 
-            if(isSpock(sheldonItem)) {
-                result.message=`Spock breaks scissors! Sheldon wins :(`;
+            if(isSpock(anotherItem)) {
+                result.message=`Spock breaks scissors! ${sndPlayer} wins :(`;
                 result.finish='danger';
             };
         break;
 
         case('paper') :
-            if(isRock(sheldonItem)){ 
-                result.message =`Paper cover the rock! Player wins :)`;
+            if(isRock(anotherItem)){ 
+                result.message =`Paper cover the rock! ${fstPlayer} wins :)`;
                 result.finish = 'success';
             };
             
-            if(isScissors(sheldonItem)) {
-                result.message=`Scissors cut to paper! Sheldon wins :(`;
+            if(isScissors(anotherItem)) {
+                result.message=`Scissors cut to paper! ${sndPlayer} wins :(`;
                 result.finish='danger'
             };
 
-            if(isPaper(sheldonItem)) result.message=`The papers crashes! It's an empty :|`;
+            if(isPaper(anotherItem)) result.message=`The papers crashes! It's an empty :|`;
 
-            if(isLizard(sheldonItem)) {
-                result.message=`Lizard eats paper! Sheldon wins :(`;
+            if(isLizard(anotherItem)) {
+                result.message=`Lizard eats paper! ${sndPlayer} wins :(`;
                 result.finish='danger';
             };
 
-            if(isSpock(sheldonItem)) {
-                result.message=`Paper disavows Spock! Player wins :)`;
+            if(isSpock(anotherItem)) {
+                result.message=`Paper disavows Spock! ${fstPlayer} wins :)`;
                 result.finish='success';
             };
         break;
         
         case('lizard') :
-            if(isRock(sheldonItem)) {
-                result.message =`Stone destroys Lizard! Sheldon wins :(`;
+            if(isRock(anotherItem)) {
+                result.message =`Stone destroys Lizard! ${sndPlayer} wins :(`;
                 result.finish='danger';
             }
             
-            if(isScissors(sheldonItem)) {
-                result.message=`Scissors beheads lizard! Sheldon wins :(`;
+            if(isScissors(anotherItem)) {
+                result.message=`Scissors beheads lizard! ${sndPlayer} wins :(`;
                 result.finish='danger'
             };
 
-            if(isPaper(sheldonItem)) {
-                result.message=`Lizard eats paper! Player wins :)`;
+            if(isPaper(anotherItem)) {
+                result.message=`Lizard eats paper! ${fstPlayer} wins :)`;
                 result.finish='success';
             };
 
-            if(isLizard(sheldonItem)) result.message=`The lizards crashes! It's an empty :|`;
+            if(isLizard(anotherItem)) result.message=`The lizards crashes! It's an empty :|`;
 
-            if(isSpock(sheldonItem)) {
-                result.message=`Lizard Poisons Spock! Player wins :)`;
+            if(isSpock(anotherItem)) {
+                result.message=`Lizard Poisons Spock! ${fstPlayer} wins :)`;
                 result.finish='success';
             };
         break;
         
         case('spock') :
-            if(isRock(sheldonItem)){
-                result.message =`Spock vaporized the rock! Player wins :)`;
+            if(isRock(anotherItem)){
+                result.message =`Spock vaporized the rock! ${fstPlayer} wins :)`;
                 result.finish = 'success';
             };
             
-            if(isScissors(sheldonItem)) {
-                result.message=`Spock breaks scissors! Player wins :)`;
+            if(isScissors(anotherItem)) {
+                result.message=`Spock breaks scissors! ${fstPlayer} wins :)`;
                 result.finish='success'
             };
 
-            if(isPaper(sheldonItem)) {
-                result.message=`Paper disavows Spock! Sheldon wins :(`;
+            if(isPaper(anotherItem)) {
+                result.message=`Paper disavows Spock! ${sndPlayer} wins :(`;
                 result.finish='danger';
             };
 
-            if(isLizard(sheldonItem)) {
-                result.message=`Lizard Poisons Spock! Sheldon wins :(`;
+            if(isLizard(anotherItem)) {
+                result.message=`Lizard Poisons Spock! ${sndPlayer} wins :(`;
                 result.finish='danger';
             };
 
-            if(isSpock(sheldonItem)) result.message=`Spocks crashes! It's an empty :|`;
+            if(isSpock(anotherItem)) result.message=`Spocks crashes! It's an empty :|`;
         break;
         default:;    
     }
