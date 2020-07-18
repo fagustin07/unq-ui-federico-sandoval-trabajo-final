@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Items from './Items';
 import LogicalFight from './LogicalFight';
 import PicksInfo from './PicksInfo';
+import Scores from './Scores';
 
 const PlayVsIA = () => {
     const [playerOnePick, setplayerOnePick] = useState(null);
@@ -28,10 +29,10 @@ const PlayVsIA = () => {
     }
 
     const restartGame = () => {
-        setResult(null);
-        setShowingButton(null);
         setplayerOnePick(null);
         setPickIA(null);
+        setResult(null);
+        setShowingButton(null);
         setshowSelections(false);
     }
 
@@ -41,30 +42,20 @@ const PlayVsIA = () => {
         setPickIA(randomPick());
         setShowingButton('fight');
     }
-
+    const showItems = () => showingButton==='fight' || !showingButton
     return(
         <>
         <div className="bg-secondary m-3 rounded">
 
-            {(showingButton==='fight' || !showingButton) &&
+            {showItems() &&
             <Items setAnItem={handleSelect} playerColor='light'/>}
             
-            <PicksInfo playerOne='Player' playerTwo='Sheldon'
-                       result={result} playerOnePick={playerOnePick}
-                       playerTwoPick={pickIA} showSelections={showSelections}/>
+            <PicksInfo result={result} playerOnePick={playerOnePick}
+                       playerTwoPick={pickIA} showSelections={showSelections} iaMode={true}/>
 
         </div>
-
-        <div className="row">
-            <p className="col text-center text-light">Player: {playerWins}</p>
-            {showingButton==='fight' && 
-                <button className="btn btn-danger col-2"
-                onClick={fight} >FIGHT!</button>}
-            {showingButton==='playAgain' && 
-                <button className="btn btn-info col-2"
-                onClick={restartGame} >PLAY AGAIN!</button>}
-            <p className="col text-center text-light">Sheldon: {iaWins}</p>
-        </div>
+        <Scores playerWins={playerWins} fight={fight} showingButton={showingButton}
+                playerTwoWins={iaWins} restartGame={restartGame} iaMode={true}/>
         </>
     );
 }

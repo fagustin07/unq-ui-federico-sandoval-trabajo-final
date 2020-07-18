@@ -9,6 +9,9 @@
   height: 12vh;
 }
 
+.bgnav{
+  background-color: rgb(92, 180, 255);
+}
 .pvsp{
   width: 64px;
   height: 64px;
