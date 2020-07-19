@@ -43,12 +43,13 @@ const PlayVsIA = () => {
         setShowingButton('fight');
     }
     const showItems = () => showingButton==='fight' || !showingButton
+
     return(
         <>
-        <div className="bg-secondary m-3 rounded">
-
+        <div className={result ? `bg-${result.finish} m-3 rounded shad bor` : 
+                                  `bg-secondary m-3 rounded  shad bor` }>
             {showItems() &&
-            <Items setAnItem={handleSelect} playerColor='light'/>}
+            <Items setAnItem={handleSelect} playerColor='info'/>}
             
             <PicksInfo result={result} playerOnePick={playerOnePick}
                        playerTwoPick={pickIA} showSelections={showSelections} iaMode={true}/>

@@ -6,10 +6,10 @@ const Navigation= ({onChangeGameMode}) => {
     const goOneVSOne = () => onChangeGameMode(false);
     
     return (
-        <nav className="navbar navbar-dark bgnav rounded">
+        <nav className="navbar navbar-dark bgnav bor rounded">
             <div type="div" className="navbar-brand btn btn-outline-dark" onClick={goPlayerVSSheldon}>
             <img className='pvsp' src='versus.png' alt="player vs sheldon"/> </div>
-            <h1 className="text-center text-light">
+            <h1 className="text-center text-dark">
             Rock, Paper, Scissors, Lizard or Spock!
             </h1>
             <div className="navbar-brand btn btn-outline-dark" type="submit" onClick={goOneVSOne}>

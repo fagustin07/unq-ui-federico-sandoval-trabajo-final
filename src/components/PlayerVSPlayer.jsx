@@ -46,7 +46,8 @@ const PlayerVSPlayer = () => {
 
     return(
         <>
-        <div className="bg-secondary m-3 rounded align-items-center">
+        <div className={result ? `bg-${result.finish} m-3 rounded shad bor` : 
+                                  `bg-secondary m-3 rounded  shad bor` }>
 
             {showItems() &&
             <Items setAnItem={playerOneSelection} playerColor='success'/>}

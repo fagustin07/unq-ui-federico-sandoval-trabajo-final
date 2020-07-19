@@ -10,7 +10,7 @@ function App() {
   const [gameMode, setGameMode] = useState(true);
 
   return (
-      <div className="bg-dark p-2 mt-2 rounded container">
+      <div className="bg-dark p-2 mt-2 rounded shad container">
           <Navigation onChangeGameMode={setGameMode}/>
           {gameMode && <PlayVsIA/>}
           {!gameMode && <PlayerVSPlayer/>}
